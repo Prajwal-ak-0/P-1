@@ -1,3 +1,5 @@
+import Navbar from "@/components/Navbar";
+
 export default async function Home() {
   const data = {
     clerkId: "clerk_1",
@@ -22,8 +24,7 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Home</h1>
-      <p>{JSON.stringify(await response.json())}</p>
+      <Navbar />
     </div>
   );
 }
