@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
 
 export default async function Home() {
   const data = {
@@ -17,14 +17,14 @@ export default async function Home() {
       body: JSON.stringify(data),
     }
   );
-  
+
   if (!response.ok) {
     throw new Error("Network response was not ok");
   }
 
   return (
     <div>
-      <Navbar />
+      <Sidebar />
     </div>
   );
 }

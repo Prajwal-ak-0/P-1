@@ -9,7 +9,7 @@ const Navbar = () => {
     <div className="fixed top-0 w-full sm:py-2 py-1 sm:px-8 px-4 shadow-md z-10">
       <div className="flex justify-between">
         <Logo />
-        <div className="flex">
+        <div className="flex gap-x-4">
           <ModeToggle />
           <UserButton afterSignOutUrl="/" />
         </div>
