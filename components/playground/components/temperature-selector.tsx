@@ -25,7 +25,7 @@ export function TemperatureSelector({
       <HoverCard openDelay={200}>
         <HoverCardTrigger asChild>
           <div className="grid gap-4">
-            <div className="flex items-center justify-between">
+            <div className="flex items-center text-black  justify-between">
               <Label htmlFor="temperature">Temperature</Label>
               <span className="w-12 rounded-md border border-transparent px-2 py-0.5 text-right text-sm text-muted-foreground hover:border-border">
                 {value}

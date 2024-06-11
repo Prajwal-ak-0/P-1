@@ -9,6 +9,7 @@ import PlaygroundPage from "@/components/playground/home";
 import { UserButton } from "@clerk/nextjs";
 import { ModeToggle } from "./ModeToggle";
 import SidebarBottomItem from "./SidebarBottomItem";
+import { Hint } from "./Hint";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -84,8 +85,9 @@ export default function Sidebar() {
                 </svg>
               </button>
             </div>
+            <Hint label="New" side="right" align="center">
             <div className="ml-4 mt-6 mb-4">
-              <Button className="justify-start h-10 px-4 rounded-xl py-2 bg hover:bg-gray-800">
+              <Button className="justify-start h-10 px-3 rounded-xl py-1 bg hover:bg-white/90">
                 <FaPlus className="w-4 h-4" />
                 {isButtonOpen && (
                   <Transition
@@ -103,6 +105,7 @@ export default function Sidebar() {
                 )}
               </Button>
             </div>
+            </Hint>
             {isOpen && (
               <Transition
                 show={isOpen}

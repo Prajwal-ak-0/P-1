@@ -20,7 +20,7 @@ export function ModeToggle({ isOpen }:{
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="flex flex-row bg-transparent text-white ">
+        <Button className="flex flex-row hover:bg-transparent bg-transparent -ml-4  text-white ">
           <Sun className="h-[1.4rem] w-[1.4rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 -mr-4" />
           <Moon className="h-[1.4rem] w-[1.4rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 -mr-4" /> 
           {isOpen && <span className="ml-8 pl-2 text-[16px] font-normal">Theme</span>}
