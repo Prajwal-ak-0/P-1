@@ -6,6 +6,9 @@ import { Button } from "@/components/ui/button";
 import { FaCog, FaPlus } from "react-icons/fa";
 import { Transition } from "@headlessui/react";
 import PlaygroundPage from "@/components/playground/home";
+import { UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "./ModeToggle";
+import SidebarBottomItem from "./SidebarBottomItem";
 
 export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
@@ -115,22 +118,8 @@ export default function Sidebar() {
               </Transition>
             )}
           </div>
-          <div className="ml-6 mb-4 flex items-center cursor-pointer">
-            <FaCog className="w-6 h-6" />
-            {isOpen && (
-              <Transition
-                show={isOpen}
-                enter="transition-opacity duration-300 delay-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-                as="div"
-              >
-                <span className="ml-2">Settings</span>
-              </Transition>
-            )}
+          <div className="pl-1">
+            <SidebarBottomItem isOpen={isOpen} />
           </div>
         </div>
       </div>
