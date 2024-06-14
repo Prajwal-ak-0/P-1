@@ -1,3 +1,4 @@
+import React from "react";
 import { Metadata } from "next";
 import Image from "next/image";
 import { CounterClockwiseClockIcon } from "@radix-ui/react-icons";
@@ -13,29 +14,28 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 
-import { CodeViewer } from "./components/code-viewer";
-import { MaxLengthSelector } from "./components/maxlength-selector";
-import { ModelSelector } from "./components/model-selector";
-import { PresetActions } from "./components/preset-actions";
-import { PresetSave } from "./components/preset-save";
-import { PresetSelector } from "./components/preset-selector";
-import { PresetShare } from "./components/preset-share";
-import { TemperatureSelector } from "./components/temperature-selector";
-import { TopPSelector } from "./components/top-p-selector";
-import { models, types } from "./data/models";
-import { presets } from "./data/presets";
+import { CodeViewer } from "@/components/playground/components/code-viewer";
+import { MaxLengthSelector } from "@/components/playground/components/maxlength-selector";
+import { ModelSelector } from "@/components/playground/components/model-selector";
+import { PresetActions } from "@/components/playground/components/preset-actions";
+import { PresetSave } from "@/components/playground/components/preset-save";
+import { PresetSelector } from "@/components/playground/components/preset-selector";
+import { PresetShare } from "@/components/playground/components/preset-share";
+import { TemperatureSelector } from "@/components/playground/components/temperature-selector";
+import { TopPSelector } from "@/components/playground/components/top-p-selector";
+import { models, types } from "@/components/playground/data/models";
+import { presets } from "@/components/playground/data/presets";
 import { UserButton } from "@clerk/nextjs";
 
-export const metadata: Metadata = {
-  title: "Playground",
-  description: "The OpenAI Playground built using the components.",
-};
-
-export default function PlaygroundPage() {
+const ModelParam = () => {
   return (
-    <>
-      <div className="hidden flex-col md:flex">
-        <Tabs defaultValue="complete" className="flex-1">
+    <div className="px-6 pt-6">
+      <div className="hidden flex-col space-y-4 sm:flex md:order-2">
+        <ModelSelector types={types} models={models} />
+        <TemperatureSelector defaultValue={[0.56]} />
+        <MaxLengthSelector defaultValue={[256]} />
+      </div>
+      {/* <Tabs defaultValue="complete" className="flex-1">
           <div className="container ">
             <div className="grid items-stretch gap-6 md:grid-cols-[1fr_200px]">
               <div className="hidden flex-col space-y-4 sm:flex md:order-2">
@@ -112,8 +112,9 @@ export default function PlaygroundPage() {
               </div>
             </div>
           </div>
-        </Tabs>
-      </div>
-    </>
+        </Tabs> */}
+    </div>
   );
-}
+};
+
+export default ModelParam;

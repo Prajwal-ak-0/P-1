@@ -1,3 +1,5 @@
+import ConversationSection from "@/components/ConversationSection";
+import {InputSection} from "@/components/InputSection";
 import Sidebar from "@/components/Sidebar";
 
 export default async function Home() {
@@ -8,7 +10,7 @@ export default async function Home() {
   };
 
   const response = await fetch(
-    "http://localhost:8000/api/users", // Change from https to http
+    "http://localhost:8000/api/users", 
     {
       method: "POST",
       headers: {
@@ -23,8 +25,16 @@ export default async function Home() {
   }
 
   return (
-    <div>
+    <div className="text-white flex">
       <Sidebar />
+      <div className="ml-64 px-10 py-8  flex flex-col justify-around h-screen w-full">
+        <div className="flex-grow">
+          <ConversationSection />
+        </div>
+        <div className="px-20">
+          <InputSection />
+        </div>
+      </div>
     </div>
   );
 }

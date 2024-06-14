@@ -6,23 +6,16 @@ import { ModeToggle } from "./ModeToggle";
 import { Transition } from "@headlessui/react";
 import { Hint } from "./Hint";
 
-interface SidebarBottomItemProps {
-  isOpen: boolean;
-}
 
-const SidebarBottomItem = ({
-  isOpen
-}:{
-  isOpen: boolean
-}) => {
+const SidebarBottomItem = () => {
   return (
     <div>
       <Hint label="Toggle" side="right" align="center">
       <div className="ml-6 mb-4 flex items-center cursor-pointer">
-        <ModeToggle isOpen={isOpen} />
-        {isOpen && (
+        <ModeToggle isOpen={true} />
+        {true && (
           <Transition
-            show={isOpen}
+            show={true}
             enter="transition-opacity duration-300 delay-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -34,12 +27,12 @@ const SidebarBottomItem = ({
         )}
       </div>
       </Hint>
-      <Hint label="Settings" side="right" align="center">
+      {/* <Hint label="Settings" side="right" align="center">
       <div className="ml-6 mb-4 flex items-center cursor-pointer">
         <FaCog className="w-8 h-6" />
-        {isOpen && (
+        {true && (
           <Transition
-            show={isOpen}
+            show={true}
             enter="transition-opacity duration-300 delay-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -52,13 +45,13 @@ const SidebarBottomItem = ({
           </Transition>
         )}
       </div>
-      </Hint>
+      </Hint> */}
       <Hint label="Profile" side="right" align="center">
       <div className="ml-6 mb-4 flex items-center cursor-pointer">
         <div className="px-1"><UserButton afterSignOutUrl="/" /></div>
-        {isOpen && (
+        {true && (
           <Transition
-            show={isOpen}
+            show={true}
             enter="transition-opacity duration-300 delay-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
