@@ -1,27 +1,48 @@
+"use client"
+
 import ConversationSection from "@/components/ConversationSection";
-import {InputSection} from "@/components/InputSection";
+import { InputSection } from "@/components/InputSection";
 import Sidebar from "@/components/Sidebar";
+import { useUser } from "@clerk/nextjs";
+import { useCallback, useEffect } from "react";
+import SignInPage from "./(auth)/sign-in/[[...sign-in]]/page";
 
-export default async function Home() {
-  const data = {
-    clerkId: "clerk_1",
-    username: "user_1",
-    email: "email_1",
-  };
+export default function Home() {
+  const { user, isSignedIn } = useUser();
 
-  const response = await fetch(
-    "http://localhost:8000/api/users", 
-    {
+  const createUser = useCallback(async () => {
+    const data = {
+      clerkId: user?.id,
+      username: (user?.firstName + "-" + user?.lastName)
+        .replace(/\s+/g, "")
+        .toLowerCase(),
+      email: user?.primaryEmailAddress?.emailAddress,
+    };
+
+    const response = await fetch("http://localhost:8000/api/users/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    }
-  );
+    });
 
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+    if (response.ok) {
+      console.log("User created successfully");
+    } else {
+      const errorData = await response.json();
+      console.error("Failed to create user:", errorData);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (isSignedIn) {
+      createUser();
+    }
+  }, [isSignedIn, createUser]);
+
+  if (!isSignedIn) {
+    return <SignInPage />;
   }
 
   return (

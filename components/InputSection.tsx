@@ -14,25 +14,28 @@ import {
 } from "firebase/storage";
 import { toast } from "sonner";
 import { FaFileUpload } from "react-icons/fa";
+import { useUser } from "@clerk/nextjs";
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 const firebaseConfig = {
-  apiKey:process.env.Firebase_API_KEY,
+  apiKey: process.env.Firebase_API_KEY,
   authDomain: process.env.Firebase_AUTH_DOMAIN,
   projectId: process.env.Firebase_PROJECT_ID,
   storageBucket: "rag-gpt.appspot.com",
   messagingSenderId: process.env.Firebase_MESSAGING_SENDER_ID,
   appId: process.env.Firebase_APP_ID,
   measurementId: process.env.Firebase_MEASUREMENT_ID,
-}
+};
 
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
 
 const InputSection = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
+    const { user } = useUser();
+
     const [file, setFile] = useState<File | null>(null);
     const [buttonText, setButtonText] = useState<string>("Add Pdf");
 
@@ -63,6 +66,7 @@ const InputSection = React.forwardRef<HTMLInputElement, InputProps>(
           toast.success("File uploaded successfully");
           setButtonText("Add Pdf");
           setFile(null);
+          createDocument(user?.id ?? "", url);
         })
         .catch((error) => {
           console.error("Upload failed:", error);
@@ -78,6 +82,31 @@ const InputSection = React.forwardRef<HTMLInputElement, InputProps>(
         if (fileInputRef.current) {
           fileInputRef.current.click();
         }
+      }
+    };
+
+    const createDocument = async (clerkId: string, link: string) => {
+      if (!clerkId) {
+        toast.error("User's clerkId not found");
+        console.error("User's clerkId not found");
+        return;
+      }
+
+      const response = await fetch(`http://localhost:8000/api/link`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ clerkId, link }),
+      });
+
+      if (response.ok) {
+        toast.success("Document created successfully");
+        console.log("Document created successfully");
+      } else {
+        const errorData = await response.json();
+        console.error("Failed to create document:", errorData);
+        toast.error("Failed to create document");
       }
     };
 
