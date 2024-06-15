@@ -75,9 +75,7 @@ const AuthLandingPage = () => {
       <p className="text-lg">
         {text}
         <span
-          className={isCursorVisible ? "inline font-light" : "hidden"}
-          style={{ color: "#C4CFDE" }}
-        >
+          className={isCursorVisible ? "inline font-light bg-[#C4CFDE]" : "hidden bg-[#C4CFDE]"}>
           |
         </span>
       </p>

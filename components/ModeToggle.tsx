@@ -16,6 +16,13 @@ export function ModeToggle({ isOpen }:{
   isOpen: boolean
 }) {
   const { setTheme } = useTheme()
+  const [isClient, setIsClient] = React.useState(false)
+
+  React.useEffect(() => {
+    setIsClient(true)
+  }, [])
+
+  if (!isClient) return null
 
   return (
     <DropdownMenu>
